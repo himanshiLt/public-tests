@@ -1,5 +1,5 @@
-workflow "on push" {
-  on = "push"
+workflow "on pr" {
+  on = "pull_request"
   resolves = ["echo", "echo my secrets"]
 }
 
