@@ -8,7 +8,13 @@ workflow "Test (Pull Request)" {
   resolves = ["npm test"]
 }
 
+
+action "checkout pull request" {
+  uses = "gr2m/git-checkout-pull-request-action@master"
+}
+
 action "npm ci" {
+  needs = ["checkout pull request"]
   uses = "docker://node:alpine"
   runs = "npm"
   args = "ci"
