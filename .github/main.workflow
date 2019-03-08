@@ -5,7 +5,7 @@ workflow "Test (Push)" {
 
 workflow "Test (Pull Request)" {
   on = "pull_request"
-  resolves = ["npm test"]
+  resolves = ["npm test (Pull Request)"]
 }
 
 action "checkout pull request" {
