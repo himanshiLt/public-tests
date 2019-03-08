@@ -1,15 +1,22 @@
-workflow "on pr" {
+workflow "Test (Push)" {
+  on = "push"
+  resolves = ["npm test"]
+}
+
+workflow "Test (Pull Request)" {
   on = "pull_request"
-  resolves = ["echo", "echo my secrets"]
+  resolves = ["npm test"]
 }
 
-action "echo" {
-  uses = "./.github/echo"
-  args = "hi"
+action "npm ci" {
+  uses = "docker://node:alpine"
+  runs = "npm"
+  args = "ci"
 }
 
-action "echo my secrets" {
-  uses = "./.github/echo-secrets"
-  secrets = ["HERES_A_SECRET"]
-  args = "hi"
+action "npm test" {
+  needs = "npm ci"
+  uses = "docker://node:alpine"
+  runs = "npm"
+  args = "test"
 }
