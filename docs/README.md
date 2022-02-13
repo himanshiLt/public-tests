@@ -1,6 +1,6 @@
 # Hello
 
-This is some content!
+This is some contenst!
 
 ```js
 const example = true
